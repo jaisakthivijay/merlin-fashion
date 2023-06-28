@@ -14,6 +14,51 @@
     <link rel="stylesheet" href="css/categories.css">
     <link rel="stylesheet" href="css/contact_form.css">
 <script src='//in.fw-cdn.com/30505393/278250.js' chat='true'> </script>
+<script>
+var url_string = window.location.href; 
+var url = new URL(url_string);
+
+var utm_source = window.localStorage.getItem("_fmc_utm_source") || "";
+var utm_medium = window.localStorage.getItem("_fmc_utm_medium") || "";
+var utm_campaign = window.localStorage.getItem("_fmc_utm_campaign") || "";
+
+var source= document.referrer
+var contact_medium
+
+
+if (url_string.indexOf("utm_") > -1 ){
+     utm_source = url.searchParams.get("utm_source");
+     utm_medium = url.searchParams.get("utm_medium");
+     utm_campaign = url.searchParams.get("utm_campaign");
+
+     window.localStorage.setItem("_fmc_utm_source", utm_source);
+     window.localStorage.setItem("_fmc_utm_medium", utm_medium);
+     window.localStorage.setItem("_fmc_utm_campaign", utm_campaign);
+
+     if (url_string.indexOf("gclid=") > -1 || url_string.indexOf("fbclid=") > -1 ) {
+
+        contact_medium = "paid"
+        window.localStorage.setItem("_fmc_contact_medium", contact_medium);
+        window.localStorage.setItem("_fmc_contact_source", source);
+      }
+     
+}
+
+if (source.indexOf("google") > -1 && url_string.indexOf("utm_") == -1)  {
+    contact_medium = "organic"
+    utm_source = "";
+     utm_medium = "";
+     utm_campaign = "";
+    
+     window.localStorage.setItem("_fmc_utm_source", utm_source);
+     window.localStorage.setItem("_fmc_utm_medium", utm_medium);
+     window.localStorage.setItem("_fmc_utm_campaign", utm_campaign);
+    window.localStorage.setItem("_fmc_contact_medium", contact_medium);
+    window.localStorage.setItem("_fmc_contact_source", source);
+
+}
+
+ </script>
 </head>
 <style>
    .slogan{
